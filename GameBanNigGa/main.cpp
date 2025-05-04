@@ -94,7 +94,6 @@ void runGame(SDL_Renderer* renderer) {
         bomss.push_back(b);
     }
     Uint32 lastSpawnTime = 1000;
-    Uint32 spawnInterval = 500;
     bool quitGame = false;
     SDL_Event e;
     int score = 0;
@@ -130,16 +129,19 @@ void runGame(SDL_Renderer* renderer) {
         }
 
         Uint32 currentTime = SDL_GetTicks();
-        if (currentTime - lastSpawnTime >= spawnInterval) {
+        if (currentTime - lastSpawnTime >= spawnIntervalEnemy) {
             int x = rand() % (SCREEN_WIDTH - 64);
             Enemy emy = {enemyTex, {x, -64, 64, 64}};
-            Bom b = {bomTex, {x, -64, 64, 64}};
-
             enemies.push_back(emy);
-            bomss.push_back(b);
-
             lastSpawnTime = currentTime;
         }
+        if (currentTime - lastSpawnTime >= spawnIntervalBom) {
+            int x = rand() % (SCREEN_WIDTH - 64);
+            Bom b = {bomTex, {x, -64, 64, 64}};
+            bomss.push_back(b);
+            lastSpawnTime = currentTime;
+        }
+
 
         for (auto& enemy : enemies) {
             enemy.rect.y += enemySpeed;
@@ -188,6 +190,7 @@ void runGame(SDL_Renderer* renderer) {
     SDL_DestroyTexture(gameBackground);
     cout << "Gà!\n";
 }
+
 
 int main(int argc, char* argv[]) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
