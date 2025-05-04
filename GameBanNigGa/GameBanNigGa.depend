@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1746339719 source:c:\users\admin\documents\gamebannigga\main.cpp
+	"defs.h"
+
+1746337442 c:\users\admin\documents\gamebannigga\defs.h
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	<vector>
+	<cstdlib>
+	<ctime>
+
